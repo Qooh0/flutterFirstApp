@@ -31,10 +31,16 @@ class RandomWordsState extends State<RandomWords> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator3'),
+        actions: <Widget>[      // Add 3 lines from here...
+          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+        ],
       ),
       body: _buildSuggestions(),
     );
   }                                          // ... to this line.
+
+  void _pushSaved() {
+  }
 
   Widget _buildSuggestions() {
     return ListView.builder(
