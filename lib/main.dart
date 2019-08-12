@@ -23,6 +23,8 @@ class RandomWords extends StatefulWidget {
 // State<RandomWords> は RandomWords で使うことを指定している
 class RandomWordsState extends State<RandomWords> {
   final List<WordPair> _suggestions = <WordPair>[];
+  // 保存した単語の組み合わせ
+  final Set<WordPair> _saved = Set<prefix0.WordPair>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
   @override                                  // Add from this line ...
   Widget build(BuildContext context) {
@@ -57,11 +59,17 @@ class RandomWordsState extends State<RandomWords> {
     });
   }
 
-  Widget _buildRow(prefix0.WordPair pair) {
+  Widget _buildRow(WordPair pair) {
+    // すでに保存されている単語の組み合わせかどうかを確認するために、最初に呼び出し
+    final bool alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
+      ),
+      trailing: Icon(
+        alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red : null,
       ),
     );
   }
